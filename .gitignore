@@ -1,13 +1,10 @@
-# Dependencies
 node_modules/
-
-# Build output
 dist/
 build/
-
-# Local env
+.next/
+.DS_Store
 .env
 .env.*
 
-# System files
-.DS_Store
+# Original copyrighted skill portraits are local-only.
+public/assets/skills/original/
