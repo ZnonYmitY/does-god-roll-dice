@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { assets } from "../../config/assets";
+import { useImageFallback } from "../../hooks/useImageFallback";
 
 const pipMap: Record<number, number[]> = {
   1: [4],
@@ -17,14 +17,12 @@ interface DiceFaceProps {
 
 function DiceFace({ value, variant }: DiceFaceProps) {
   const src = assets.dice[variant](value);
-  const [imageFailed, setImageFailed] = useState(false);
-
-  useEffect(() => setImageFailed(false), [src]);
+  const { failed: imageFailed, markFailed } = useImageFallback(src);
 
   return (
     <div className={`die die--${variant}`} aria-label={`${value} 点`}>
       {!imageFailed && (
-        <img src={src} alt="" aria-hidden="true" onError={() => setImageFailed(true)} />
+        <img src={src} alt="" aria-hidden="true" onError={markFailed} />
       )}
       {imageFailed && (
         <span className="die__fallback" aria-hidden="true">

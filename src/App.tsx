@@ -7,11 +7,13 @@ import { HistoryDrawer } from "./components/HistoryDrawer/HistoryDrawer";
 import { QuestionInput } from "./components/QuestionInput/QuestionInput";
 import { ResultScene } from "./components/ResultScene/ResultScene";
 import { RollStatus } from "./components/RollStatus/RollStatus";
+import { SceneBackground } from "./components/SceneBackground/SceneBackground";
 import { ShareModal } from "./components/ShareModal/ShareModal";
 import { WhisperLayer } from "./components/WhisperLayer/WhisperLayer";
 import { loadingTexts } from "./data";
 import { useHistory } from "./hooks/useHistory";
 import { useReducedMotion } from "./hooks/useReducedMotion";
+import { useAssetCssVariables } from "./hooks/useAssetCssVariables";
 import type { AppState, CheckHistoryItem, CheckResult } from "./types";
 import {
   generateCheck,
@@ -33,6 +35,7 @@ function App() {
   const [aboutOpen, setAboutOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const reducedMotion = useReducedMotion();
+  const assetCssVariables = useAssetCssVariables();
   const { history, saveResult, clearHistory } = useHistory();
 
   const startRoll = useCallback(
@@ -69,7 +72,7 @@ function App() {
         setRevealStep(0);
         setAppState("revealing");
       },
-      reducedMotion ? 80 : 900,
+      reducedMotion ? 80 : 850,
     );
     return () => window.clearTimeout(timeout);
   }, [appState, reducedMotion, result]);
@@ -86,7 +89,7 @@ function App() {
           setRevealStep((current) => current + 1);
         }
       },
-      reducedMotion ? 40 : revealStep < 3 ? 300 : 420,
+      reducedMotion ? 40 : revealStep < 3 ? 180 : 220,
     );
     return () => window.clearTimeout(timeout);
   }, [appState, reducedMotion, result, revealStep, saveResult]);
@@ -118,8 +121,8 @@ function App() {
   const isHomeState = appState === "idle" || appState === "rolling";
 
   return (
-    <div className={`app app--${appState}`}>
-      <div className="background-layer" aria-hidden="true" />
+    <div className={`app app--${appState}`} style={assetCssVariables}>
+      <SceneBackground state={appState} />
       <div className="texture-layer" aria-hidden="true" />
 
       <div className="app__content">

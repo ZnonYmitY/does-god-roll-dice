@@ -42,10 +42,16 @@ export function ShareModal({ open, result, onClose }: ShareModalProps) {
   const saveImage = async () => {
     const dataUrl = preview ?? (await createImage());
     if (!dataUrl) return;
+    const response = await fetch(dataUrl);
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.download = `上帝掷骰子吗-${result.id.slice(0, 8)}.png`;
-    link.href = dataUrl;
+    link.href = objectUrl;
+    document.body.appendChild(link);
     link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
   };
 
   const close = () => {

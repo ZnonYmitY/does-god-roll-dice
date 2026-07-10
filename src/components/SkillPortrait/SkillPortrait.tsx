@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { assets } from "../../config/assets";
 import { skillById } from "../../data";
+import { useImageFallback } from "../../hooks/useImageFallback";
 import type { SkillAttribute } from "../../types";
 
 interface SkillPortraitProps {
@@ -12,9 +12,7 @@ export function SkillPortrait({ skill, size = "medium" }: SkillPortraitProps) {
   const definition = skillById.get(skill);
   const attribute: SkillAttribute = definition?.attribute ?? "intellect";
   const src = assets.skillPortrait(skill);
-  const [imageFailed, setImageFailed] = useState(false);
-
-  useEffect(() => setImageFailed(false), [src]);
+  const { failed: imageFailed, markFailed } = useImageFallback(src);
 
   return (
     <div
@@ -27,7 +25,7 @@ export function SkillPortrait({ skill, size = "medium" }: SkillPortraitProps) {
           alt=""
           aria-hidden="true"
           loading="lazy"
-          onError={() => setImageFailed(true)}
+          onError={markFailed}
         />
       )}
       {imageFailed && (
