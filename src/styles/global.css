@@ -1,0 +1,38 @@
+:root {
+  color: #d5d0c4;
+  background: #171918;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: #171918;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 12vh 8vw;
+  background: #171918;
+}
