@@ -1,6 +1,6 @@
 # 上帝掷骰子吗？
 
-> 你的脑内正在请求一次检定。
+> 某些问题本不值得回答。遗憾的是，它们已经醒了。
 >
 > 两枚骰子对此表示愿意负责。  
 > 但它们不会解释结果。
@@ -15,20 +15,17 @@
 - 通过关键词分类、对象提取、模板随机组合和历史去重生成结果。
 - 支持非问句、情绪碎片和荒诞输入。
 - 结果包含骰点、2–4 条技能发言、最终判定和分享图。
-- 首版允许使用《极乐迪斯科》原作技能肖像作为个人 Demo 占位素材。
+- 首版允许使用《极乐迪斯科》原作技能肖像作为个人 Demo 本地占位素材。
 - v1.0 不要求用户登录；检定记录、收藏和设置优先保存在浏览器本地。
 
 ## 核心文案
 
-- 产品名：**上帝掷骰子吗？**
-- 首页主标题：**你的脑内正在请求一次检定。**
-- 首页副文案：
-  - 某些问题本不值得回答。
-  - 遗憾的是，它们已经醒了。
+- 产品名 / 首页主标题：**上帝掷骰子吗？**
+- 首页副文案：**某些问题本不值得回答。遗憾的是，它们已经醒了。**
+- 输入提示：**向混沌提出一个问题……**
 - 主按钮：**掷骰检定**
-- 骰子说明：
-  - 两枚骰子对此表示愿意负责。
-  - 但它们不会解释结果。
+- 加载态：**你的脑内正在请求一次检定……**
+- 骰子说明：**两枚骰子对此表示愿意负责，但它们不会解释结果。**
 
 ## 文档
 
@@ -36,11 +33,13 @@
 2. [文字库与模板设计 v1.0](docs/02-content-library.md)
 3. [视觉与交互设计方案 v1.0](docs/03-visual-design.md)
 4. [素材、肖像与版权说明](docs/04-assets-and-rights.md)
+5. [开发交接与资产准备清单](docs/05-development-handoff.md)
+6. [Codex 开发启动任务](docs/06-codex-start-task.md)
 
 ## 建议技术栈
 
 - React + TypeScript
-- Vite 或 Next.js 静态导出
+- Vite
 - CSS / Motion 实现动画
 - localStorage 保存最近结果并去重
 - html2canvas 或 satori 生成分享图
@@ -50,10 +49,16 @@
 ```text
 src/
   components/
+    Header/
+    Hero/
     QuestionInput/
+    WhisperLayer/
     DiceRoller/
+    RollStatus/
     SkillVoice/
     VerdictPanel/
+    ResultActions/
+    HistoryDrawer/
     ShareCard/
   data/
     skills.json
@@ -74,11 +79,19 @@ src/
 public/
   assets/
     backgrounds/
+    ui/
     dice/
-    skills/
+    icons/
     textures/
-    audio/
+    share/
+    skills/original/
 ```
+
+## 开发状态
+
+Codex 可以立即开始：项目骨架、状态机、2D6 逻辑、文字库接入、动态低语、结果页、历史记录和分享图结构。
+
+在独立背景、按钮、输入框、骰子、图标和纹理资源进入上述路径前，视觉层只能使用明确占位，不得自行生图或使用网络图片替代。
 
 ## 后续优化
 
