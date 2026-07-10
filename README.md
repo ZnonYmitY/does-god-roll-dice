@@ -42,7 +42,7 @@
 - Vite
 - CSS / Motion 实现动画
 - localStorage 保存最近结果并去重
-- html2canvas 或 satori 生成分享图
+- html-to-image 生成分享图
 
 ## 建议目录
 
@@ -89,9 +89,23 @@ public/
 
 ## 开发状态
 
-Codex 可以立即开始：项目骨架、状态机、2D6 逻辑、文字库接入、动态低语、结果页、历史记录和分享图结构。
+v1.0 React Demo 已实现：项目骨架、状态机、2D6 逻辑、文字库接入、动态低语、结果页、历史记录和分享图导出。
 
-在独立背景、按钮、输入框、骰子、图标和纹理资源进入上述路径前，视觉层只能使用明确占位，不得自行生图或使用网络图片替代。
+在独立背景、按钮、输入框、骰子、图标和纹理资源进入上述路径前，视觉层使用明确的 CSS/HTML 占位，不自行生图或使用网络图片替代。具体状态见 [ASSET_STATUS.md](ASSET_STATUS.md)。
+
+## 本地运行
+
+```bash
+npm install
+npm run dev
+```
+
+生产构建与静态检查：
+
+```bash
+npm run build
+npm run lint
+```
 
 ## 后续优化
 
