@@ -1,17 +1,84 @@
-# 上帝掷骰子吗
+# 上帝掷骰子吗？
 
-一款致敬《极乐迪斯科》技能检定体验的互动决策小游戏。
+> 你的脑内正在请求一次检定。
+>
+> 两枚骰子对此表示愿意负责。  
+> 但它们不会解释结果。
 
-用户输入一个纠结、荒诞、日常或情绪化的问题，点击“掷骰检定”后，系统会掷出 2D6，根据骰点结果召唤若干脑内技能发言，并给出一个带有黑色幽默和存在主义气质的最终判定。
+一个致敬《极乐迪斯科》技能检定体验的轻量互动网页。用户可以输入问题、念头或任何精神噪声，掷出两枚六面骰，让脑内技能依次发言，并获得一个不一定可靠、但足够有戏剧性的结果。
 
-它不是严肃建议工具，而是一个把选择困难转化为戏剧化脑内争吵的互动网页。
+## v1.0 产品边界
 
-## 状态
+- 纯前端实现，不接大模型。
+- 使用两枚六面骰（2D6）。
+- 不引入难度值、技能值和修正值。
+- 通过关键词分类、对象提取、模板随机组合和历史去重生成结果。
+- 支持非问句、情绪碎片和荒诞输入。
+- 结果包含骰点、2–4 条技能发言、最终判定和分享图。
+- 首版允许使用《极乐迪斯科》原作技能肖像作为个人 Demo 占位素材。
 
-项目初始化中。详细设计文档后续补充。
+## 核心文案
 
-## 后续
+- 产品名：**上帝掷骰子吗？**
+- 首页主标题：**你的脑内正在请求一次检定。**
+- 首页副文案：
+  - 某些问题本不值得回答。
+  - 遗憾的是，它们已经醒了。
+- 主按钮：**掷骰检定**
+- 骰子说明：
+  - 两枚骰子对此表示愿意负责。
+  - 但它们不会解释结果。
 
-- 补充产品与玩法设计文档
-- 确定网页技术栈
-- 实现 2D6 检定与脑内技能发言系统
+## 文档
+
+1. [产品需求文档 PRD v1.0](docs/01-product-requirements.md)
+2. [文字库与模板设计 v1.0](docs/02-content-library.md)
+3. [视觉与交互设计方案 v1.0](docs/03-visual-design.md)
+4. [素材、肖像与版权说明](docs/04-assets-and-rights.md)
+
+## 建议技术栈
+
+- React + TypeScript
+- Vite 或 Next.js 静态导出
+- CSS / Motion 实现动画
+- localStorage 保存最近结果并去重
+- html2canvas 或 satori 生成分享图
+
+## 建议目录
+
+```text
+src/
+  components/
+    QuestionInput/
+    DiceRoller/
+    SkillVoice/
+    VerdictPanel/
+    ShareCard/
+  data/
+    skills.json
+    categories.json
+    keywords.json
+    loading-texts.json
+    skill-lines.json
+    verdicts.json
+    share-templates.json
+  utils/
+    classifyInput.ts
+    extractObject.ts
+    rollDice.ts
+    selectSkills.ts
+    selectLines.ts
+    avoidRepeat.ts
+    generateShareCard.ts
+public/
+  assets/
+    backgrounds/
+    dice/
+    skills/
+    textures/
+    audio/
+```
+
+## 声明
+
+本项目为非官方个人粉丝致敬 Demo，与 ZA/UM 或《极乐迪斯科》版权方无关联。原作技能名称、肖像和相关视觉资产归其权利人所有。请勿将原作资产用于商业用途；公开发布前应确认素材使用边界或替换为原创资产。
