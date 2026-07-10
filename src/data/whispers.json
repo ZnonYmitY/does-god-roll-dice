@@ -1,0 +1,6 @@
+[
+  { "id": "whisper_001", "lines": [{ "skill": "logic", "text": "这个页面无法替你作出可靠决定。" }, { "skill": "drama", "text": "那么它已经比大多数决定工具诚实了。" }] },
+  { "id": "whisper_002", "lines": [{ "skill": "inland-empire", "text": "不要输入。它们会知道的。" }, { "skill": "electrochemistry", "text": "输入炸鸡。" }] },
+  { "id": "whisper_003", "lines": [{ "skill": "volition", "text": "你仍然可以关掉这个页面。" }, { "skill": "conceptualization", "text": "但那会毁掉这个场景的构图。" }] },
+  { "id": "whisper_004", "lines": [{ "skill": "shivers", "text": "城市正在等待一个微不足道的决定。" }, { "skill": "composure", "text": "先别让它看出你在犹豫。" }] }
+]

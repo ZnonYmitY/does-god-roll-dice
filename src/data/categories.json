@@ -1,0 +1,11 @@
+[
+  { "id": "food", "name": "食物欲望", "fallbackObjects": ["这顿饭", "这个味道", "这份热量申请"], "mainSkills": ["electrochemistry"], "opposingSkills": ["logic", "volition"], "atmosphereSkills": ["shivers", "inland-empire", "endurance"] },
+  { "id": "social", "name": "社交关系", "fallbackObjects": ["这次见面", "这条消息", "这段人类连接"], "mainSkills": ["suggestion", "composure", "empathy"], "opposingSkills": ["logic", "volition", "half-light"], "atmosphereSkills": ["drama", "inland-empire", "shivers"] },
+  { "id": "work_study", "name": "学习工作", "fallbackObjects": ["这个任务", "这份文件", "这件拖到现在的事"], "mainSkills": ["volition", "logic"], "opposingSkills": ["electrochemistry", "inland-empire"], "atmosphereSkills": ["conceptualization", "encyclopedia", "composure"] },
+  { "id": "shopping", "name": "消费冲动", "fallbackObjects": ["这个商品", "购物车里的东西", "这次扣款"], "mainSkills": ["electrochemistry", "savoir-faire"], "opposingSkills": ["logic", "volition"], "atmosphereSkills": ["drama", "conceptualization"] },
+  { "id": "rest", "name": "休息摆烂", "fallbackObjects": ["这次休息", "这张床", "这个不想动的念头"], "mainSkills": ["endurance", "volition", "inland-empire"], "opposingSkills": ["logic", "authority"], "atmosphereSkills": ["shivers", "electrochemistry"] },
+  { "id": "creation", "name": "创作行动", "fallbackObjects": ["这个项目", "这个想法", "这件还没开始的作品"], "mainSkills": ["conceptualization", "volition"], "opposingSkills": ["logic", "drama"], "atmosphereSkills": ["inland-empire", "shivers", "interfacing"] },
+  { "id": "life", "name": "人生混沌", "fallbackObjects": ["这个选择", "这段人生", "这个方向"], "mainSkills": ["volition", "inland-empire", "logic"], "opposingSkills": ["half-light", "electrochemistry"], "atmosphereSkills": ["shivers", "empathy", "conceptualization"] },
+  { "id": "absurd", "name": "荒诞乱回", "fallbackObjects": ["这件事", "这个念头", "这团精神噪声"], "mainSkills": ["inland-empire", "shivers", "conceptualization"], "opposingSkills": ["logic", "encyclopedia"], "atmosphereSkills": ["drama", "half-light", "perception"] },
+  { "id": "unknown", "name": "状态未决", "fallbackObjects": ["这件事", "这个念头", "这个问题", "这团精神噪声"], "mainSkills": ["logic", "volition", "inland-empire", "conceptualization"], "opposingSkills": ["electrochemistry", "half-light", "drama"], "atmosphereSkills": ["shivers", "composure", "perception"] }
+]

@@ -1,0 +1,19 @@
+{
+  "titles": [
+    { "id": "share_title_001", "text": "上帝掷骰子吗？" },
+    { "id": "share_title_002", "text": "一次不负责任的精神判定" },
+    { "id": "share_title_003", "text": "今日骰子意见" }
+  ],
+  "subtitles": [
+    { "id": "share_subtitle_001", "text": "两枚骰子，若干脑内噪声，一个不一定可靠的答案。" },
+    { "id": "share_subtitle_002", "text": "这不是建议。这是概率和精神状态的合谋。" },
+    { "id": "share_subtitle_003", "text": "如果结果荒诞，说明系统运行正常。" }
+  ],
+  "footers": [
+    { "id": "share_footer_001", "text": "两枚骰子对此表示愿意负责。但它们不会解释结果。" },
+    { "id": "share_footer_002", "text": "上帝尚未回应。骰子已经回应。" },
+    { "id": "share_footer_003", "text": "观测完成。责任归属不明。" },
+    { "id": "share_footer_004", "text": "命运已读。解释失败。" },
+    { "id": "share_footer_005", "text": "如果你不同意，可以再掷一次。" }
+  ]
+}
