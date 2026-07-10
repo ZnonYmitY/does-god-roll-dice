@@ -101,12 +101,29 @@ function App() {
     saveResult(next);
   };
 
-  const handleEdit = () => {
+  const returnToInput = (clearQuestion: boolean) => {
     setShareOpen(false);
+    setHistoryOpen(false);
+    setAboutOpen(false);
     setResult(null);
     setRevealStep(0);
+    setError("");
+    if (clearQuestion) setQuestion("");
     setAppState("idle");
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
+      window.requestAnimationFrame(() => {
+        const input = document.getElementById("question-input");
+        if (input instanceof HTMLTextAreaElement) {
+          input.focus();
+          if (!clearQuestion) input.select();
+        }
+      });
+    });
   };
+
+  const handleEdit = () => returnToInput(false);
+  const handleHome = () => returnToInput(true);
 
   const handleRestore = (item: CheckHistoryItem) => {
     const restored = restoreHistoryItem(item);
@@ -126,7 +143,11 @@ function App() {
       <div className="texture-layer" aria-hidden="true" />
 
       <div className="app__content">
-        <Header onAbout={() => setAboutOpen(true)} onHistory={() => setHistoryOpen(true)} />
+        <Header
+          onHome={handleHome}
+          onAbout={() => setAboutOpen(true)}
+          onHistory={() => setHistoryOpen(true)}
+        />
 
         {isHomeState && (
           <main className="home-scene">

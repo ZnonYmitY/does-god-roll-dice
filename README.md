@@ -107,6 +107,12 @@ npm run build
 npm run lint
 ```
 
+## 公开预览
+
+[https://znonymity.github.io/does-god-roll-dice/](https://znonymity.github.io/does-god-roll-dice/)
+
+公开站点由 `feat/v1-web-app` 分支的 GitHub Pages Actions 工作流构建和发布。
+
 ## 后续优化
 
 以下能力不纳入 v1.0，待核心检定体验验证后再评估：

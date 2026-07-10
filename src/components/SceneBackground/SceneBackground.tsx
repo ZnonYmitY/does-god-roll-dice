@@ -1,5 +1,6 @@
 import { useEffect, useState, type CSSProperties } from "react";
 import { assets } from "../../config/assets";
+import { useImageFallback } from "../../hooks/useImageFallback";
 import type { AppState } from "../../types";
 
 interface SceneBackgroundProps {
@@ -26,6 +27,11 @@ export function SceneBackground({ state }: SceneBackgroundProps) {
     : mobile
       ? assets.backgrounds.homeMobile
       : assets.backgrounds.homeDesktop;
+  const referenceUrl = isResult
+    ? assets.references.resultBackgroundSheet
+    : assets.references.homeBackgroundSheet;
+  const { failed: referenceFailed, markFailed: markReferenceFailed } =
+    useImageFallback(referenceUrl);
 
   useEffect(() => {
     let active = true;
@@ -44,9 +50,17 @@ export function SceneBackground({ state }: SceneBackgroundProps) {
 
   return (
     <div
-      className={`background-layer background-layer--${isResult ? "result" : "home"}`}
+      className={`background-layer background-layer--${isResult ? "result" : "home"} ${!loadedUrl && !referenceFailed ? "background-layer--reference" : ""}`}
       style={style}
       aria-hidden="true"
-    />
+    >
+      {!loadedUrl && !referenceFailed && (
+        <div
+          className={`reference-background reference-background--${isResult ? "result" : "home"}`}
+        >
+          <img src={referenceUrl} alt="" onError={markReferenceFailed} />
+        </div>
+      )}
+    </div>
   );
 }

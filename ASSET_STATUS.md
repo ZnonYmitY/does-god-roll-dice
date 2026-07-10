@@ -12,10 +12,10 @@ Status meanings:
 
 | Asset | File | Fallback | Integration |
 |---|---|---|---|
-| `home_bg_desktop.webp` | missing | placeholder implemented | ready for replacement |
-| `home_bg_mobile.webp` | missing | placeholder implemented | ready for replacement |
-| `result_bg_desktop.webp` | missing | placeholder implemented | ready for replacement |
-| `result_bg_mobile.webp` | missing | placeholder implemented | ready for replacement |
+| `home_bg_desktop.webp` | missing | placeholder implemented (design reference region) | ready for replacement |
+| `home_bg_mobile.webp` | missing | placeholder implemented (design reference region) | ready for replacement |
+| `result_bg_desktop.webp` | missing | placeholder implemented (design reference region) | ready for replacement |
+| `result_bg_mobile.webp` | missing | placeholder implemented (design reference region) | ready for replacement |
 
 ## Input And Buttons
 
@@ -93,4 +93,4 @@ All remaining skill slugs listed in `src/data/skills.json` use the same `SkillPo
 
 ## Reference Files
 
-The PNG files in `disign/` are visual references only. They are not imported, cropped, or served by the application.
+The PNG files in `disign/` remain the source references. Two clearly separated background regions are currently exposed through copies in `public/assets/reference/` and clipped by CSS at runtime; prototype pages containing fixed UI text are still not used as webpage backgrounds.

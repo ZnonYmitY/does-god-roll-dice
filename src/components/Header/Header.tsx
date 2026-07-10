@@ -2,16 +2,23 @@ import { assets } from "../../config/assets";
 import { AssetIcon } from "../AssetIcon/AssetIcon";
 
 interface HeaderProps {
+  onHome: () => void;
   onAbout: () => void;
   onHistory: () => void;
 }
 
-export function Header({ onAbout, onHistory }: HeaderProps) {
+export function Header({ onHome, onAbout, onHistory }: HeaderProps) {
   return (
     <header className="site-header">
-      <div className="site-header__mark" aria-label="双骰图标">
+      <button
+        className="site-header__mark"
+        type="button"
+        onClick={onHome}
+        aria-label="返回首页"
+        title="返回首页"
+      >
         <AssetIcon src={assets.icons.dicePair} fallback="◆◆" />
-      </div>
+      </button>
       <nav className="site-header__nav" aria-label="主导航">
         <button className="nav-button" type="button" onClick={onAbout}>
           关于检定

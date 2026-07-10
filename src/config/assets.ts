@@ -1,4 +1,7 @@
-const path = (value: string) => `/assets/${value}`;
+const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const path = (value: string) => `${baseUrl}assets/${value}`;
 
 export const assets = {
   backgrounds: {
@@ -50,6 +53,10 @@ export const assets = {
     backgroundA: path("share/share_card_bg_a.webp"),
     backgroundB: path("share/share_card_bg_b.webp"),
     backgroundC: path("share/share_card_bg_c.webp"),
+  },
+  references: {
+    homeBackgroundSheet: path("reference/home_background_sheet.png"),
+    resultBackgroundSheet: path("reference/result_background_sheet.png"),
   },
   skillPortrait: (slug: string) => path(`skills/original/${slug}.webp`),
 } as const;

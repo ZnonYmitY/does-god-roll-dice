@@ -116,6 +116,7 @@ button:disabled {
     linear-gradient(0deg, transparent 56%, rgba(12, 15, 15, 0.76) 56.5%, transparent 57%),
     linear-gradient(160deg, rgba(84, 101, 105, 0.2), rgba(22, 36, 41, 0.45));
   opacity: 0.62;
+  z-index: 2;
 }
 
 .background-layer::after {
@@ -131,6 +132,38 @@ button:disabled {
   border-top: 1px solid rgba(180, 154, 76, 0.13);
   transform: skewY(-1.5deg);
   transform-origin: bottom right;
+  z-index: 2;
+}
+
+.background-layer--reference::before,
+.background-layer--reference::after {
+  opacity: 0;
+}
+
+.reference-background {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+}
+
+.reference-background img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
+  user-select: none;
+}
+
+.reference-background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, rgba(4, 5, 5, 0.78), rgba(8, 10, 9, 0.42) 48%, rgba(8, 10, 9, 0.08));
+}
+
+.reference-background--result::after {
+  background: linear-gradient(90deg, rgba(4, 5, 5, 0.82), rgba(8, 10, 9, 0.5) 56%, rgba(8, 10, 9, 0.12));
 }
 
 .background-layer--result {
@@ -183,8 +216,17 @@ button:disabled {
   height: 46px;
   place-items: center;
   color: var(--paper);
+  border: 0;
   border-right: 1px solid rgba(213, 208, 196, 0.24);
-  padding-right: 16px;
+  padding: 0 16px 0 0;
+  background: transparent;
+  cursor: pointer;
+  transition: filter 180ms ease, transform 180ms ease;
+}
+
+.site-header__mark:hover {
+  filter: brightness(1.22);
+  transform: translateY(-1px);
 }
 
 .site-header__mark .asset-icon {
@@ -1526,6 +1568,20 @@ button:disabled {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@media (min-width: 761px) {
+  .reference-background--home img {
+    top: -10.1vw;
+    left: -4.8vw;
+    width: 151.6vw;
+  }
+
+  .reference-background--result img {
+    top: -4.15vw;
+    left: -3.28vw;
+    width: 139.48vw;
+  }
+}
+
 @media (max-width: 1050px) {
   .app__content {
     padding: 0 34px;
@@ -1576,6 +1632,23 @@ button:disabled {
     left: 0;
     height: 18vh;
     opacity: 0.45;
+  }
+
+  .reference-background::after {
+    background: linear-gradient(180deg, rgba(5, 6, 6, 0.35), rgba(5, 6, 6, 0.74) 44%, rgba(5, 6, 6, 0.95));
+  }
+
+  .reference-background--home img {
+    top: -14.02vh;
+    left: -154.2vh;
+    width: auto;
+    height: 149.43vh;
+  }
+
+  .reference-background--result img {
+    top: -13.7vw;
+    left: -353.6vw;
+    width: 464.5vw;
   }
 
   .app__content {
