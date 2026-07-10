@@ -152,6 +152,7 @@ button:disabled {
   display: block;
   max-width: none;
   height: auto;
+  filter: brightness(1.14) saturate(0.96);
   user-select: none;
 }
 
@@ -159,7 +160,7 @@ button:disabled {
   position: absolute;
   inset: 0;
   content: "";
-  background: linear-gradient(90deg, rgba(4, 5, 5, 0.78), rgba(8, 10, 9, 0.42) 48%, rgba(8, 10, 9, 0.08));
+  background: linear-gradient(90deg, rgba(4, 5, 5, 0.7), rgba(8, 10, 9, 0.25) 48%, rgba(8, 10, 9, 0));
 }
 
 .reference-background--result::after {
@@ -232,6 +233,7 @@ button:disabled {
 .site-header__mark .asset-icon {
   width: 43px;
   height: 34px;
+  filter: none;
 }
 
 .site-header__nav {
