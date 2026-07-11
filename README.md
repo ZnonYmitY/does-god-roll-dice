@@ -44,6 +44,25 @@
 - localStorage 保存最近结果并去重
 - html-to-image 生成分享图
 
+## 字体与排版实现
+
+页面使用“宋体骨架 + 旧印刷纹理 + 轻微错位”的字体系统，字体职责集中为以下 CSS 变量：
+
+```css
+--font-display-cn: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+--font-body-cn: "Noto Serif SC", "Songti SC", serif;
+--font-skill-en: "Cormorant Garamond", Georgia, serif;
+--font-system: "IBM Plex Mono", monospace;
+```
+
+- 中文主标题使用 Noto Serif SC 900；中文正文使用 400–500；按钮使用 600。
+- 英文技能名使用 Cormorant Garamond 600、全大写和轻度字距。
+- 骰点、观测编号与系统状态使用 IBM Plex Mono。
+- 主标题通过 CSS 复制层实现轻度重影、局部锈红错版和条纹 mask；正文、输入内容及长篇技能发言不使用强破损效果。
+- 字体通过 Fontsource 以 WOFF2 随生产构建发布，不依赖运行时 Google Fonts 请求；所有字体均保留系统回退，加载失败不会阻塞页面或破坏布局。
+
+当前使用的 Noto Serif SC、Cormorant Garamond 与 IBM Plex Mono 均采用 SIL Open Font License 1.1。字体包版本与授权元数据记录在 `package-lock.json`，不得替换为来源或授权不明的商业字体。
+
 ## 建议目录
 
 ```text
@@ -89,7 +108,7 @@ public/
 
 ## 开发状态
 
-v1.0 React Demo 已实现：项目骨架、状态机、2D6 逻辑、文字库接入、动态低语、结果页、历史记录和分享图导出。
+v1.0 React Demo 已实现：项目骨架、状态机、2D6 逻辑、文字库接入、动态低语、结果页、历史记录、分享图导出和正式字体接入。
 
 在独立背景、按钮、输入框、骰子、图标和纹理资源进入上述路径前，视觉层使用明确的 CSS/HTML 占位，不自行生图或使用网络图片替代。具体状态见 [ASSET_STATUS.md](ASSET_STATUS.md)。
 
