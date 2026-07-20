@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
+import { assets } from "../../config/assets";
 import type { CheckResult } from "../../types";
+import { AssetIcon } from "../AssetIcon/AssetIcon";
 import { Modal } from "../Modal/Modal";
 import { ShareCard } from "../ShareCard/ShareCard";
 
@@ -75,6 +77,7 @@ export function ShareModal({ open, result, onClose }: ShareModalProps) {
       {error && <p className="share-error">{error}</p>}
       <div className="share-modal__actions">
         <button className="secondary-button" type="button" onClick={createImage} disabled={busy}>
+          <AssetIcon src={assets.icons.expand} fallback="↗" />
           {busy ? "生成中……" : "预览"}
         </button>
         <button className="primary-button" type="button" onClick={saveImage} disabled={busy}>

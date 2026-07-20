@@ -72,7 +72,7 @@ function App() {
         setRevealStep(0);
         setAppState("revealing");
       },
-      reducedMotion ? 80 : 850,
+      reducedMotion ? 80 : 1800,
     );
     return () => window.clearTimeout(timeout);
   }, [appState, reducedMotion, result]);
@@ -80,6 +80,16 @@ function App() {
   useEffect(() => {
     if (appState !== "revealing" || !result) return;
     const finalStep = result.skillLines.length + 3;
+    const revealDelay =
+      revealStep === 0
+        ? 800
+        : revealStep === 1
+          ? 700
+          : revealStep === 2
+            ? 900
+            : revealStep <= result.skillLines.length + 2
+              ? 1000
+              : 1100;
     const timeout = window.setTimeout(
       () => {
         if (revealStep >= finalStep) {
@@ -89,7 +99,7 @@ function App() {
           setRevealStep((current) => current + 1);
         }
       },
-      reducedMotion ? 40 : revealStep < 3 ? 180 : 220,
+      reducedMotion ? 40 : revealDelay,
     );
     return () => window.clearTimeout(timeout);
   }, [appState, reducedMotion, result, revealStep, saveResult]);
@@ -98,7 +108,8 @@ function App() {
     if (!result) return;
     const next = reshuffleCheck(result, history);
     setResult(next);
-    saveResult(next);
+    setRevealStep(2);
+    setAppState("revealing");
   };
 
   const returnToInput = (clearQuestion: boolean) => {

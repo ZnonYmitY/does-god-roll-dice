@@ -21,11 +21,13 @@ export function AssetIcon({ src, alt = "", fallback, className = "" }: AssetIcon
   }
 
   return (
-    <img
-      className={`asset-icon ${className}`}
-      src={src}
-      alt={alt}
-      onError={() => setFailed(true)}
-    />
+    <span className={`asset-icon asset-icon--image ${className}`} aria-hidden={!alt}>
+      <img
+        className="asset-icon__source"
+        src={src}
+        alt={alt}
+        onError={() => setFailed(true)}
+      />
+    </span>
   );
 }

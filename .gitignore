@@ -6,5 +6,8 @@ build/
 .env
 .env.*
 
+# Raw design drops stay local. Promoted runtime assets live under public/assets/.
+design/new/
+
 # Original copyrighted skill portraits are local-only.
 public/assets/skills/original/

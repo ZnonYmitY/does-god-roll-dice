@@ -21,9 +21,11 @@ export function Header({ onHome, onAbout, onHistory }: HeaderProps) {
       </button>
       <nav className="site-header__nav" aria-label="主导航">
         <button className="nav-button" type="button" onClick={onAbout}>
+          <AssetIcon src={assets.icons.info} fallback="i" />
           关于检定
         </button>
         <button className="nav-button" type="button" onClick={onHistory}>
+          <AssetIcon src={assets.icons.history} fallback="↶" />
           检定记录
         </button>
       </nav>
