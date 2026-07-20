@@ -44,9 +44,15 @@ export function ResultScene({
           <SkillPortrait skill={result.mainSkill} size="large" />
         </div>
         <div className="check-summary__copy">
-          <p className="check-summary__name">
-            [{mainSkill?.name.toLocaleUpperCase() ?? result.mainSkill.toLocaleUpperCase()} CHECK]
-          </p>
+          <div className="check-summary__identity">
+            <p className="check-summary__label">主导技能 / DOMINANT FACULTY</p>
+            <p className="check-summary__name">
+              <strong>
+                {mainSkill?.name.toLocaleUpperCase() ?? result.mainSkill.toLocaleUpperCase()}
+              </strong>
+              <span>{mainSkill?.nameZh ?? result.mainSkill}检定</span>
+            </p>
+          </div>
           <DiceRoller dice={result.dice} compact />
           {state === "revealing" && revealStep === 0 && (
             <p className="reaction-line">

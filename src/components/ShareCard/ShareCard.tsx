@@ -38,7 +38,13 @@ export const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(function Sha
       <section className="share-card__check">
         <SkillPortrait skill={result.mainSkill} size="large" />
         <div>
-          <p>[{skill?.name.toLocaleUpperCase() ?? result.mainSkill.toLocaleUpperCase()} CHECK]</p>
+          <div className="share-card__skill">
+            <span>主导技能 / DOMINANT FACULTY</span>
+            <p>
+              {skill?.name.toLocaleUpperCase() ?? result.mainSkill.toLocaleUpperCase()}
+              <small>{skill?.nameZh ?? result.mainSkill}检定</small>
+            </p>
+          </div>
           <DiceRoller dice={result.dice} compact />
           <strong>
             {result.dice[0]} + {result.dice[1]} = {result.total}

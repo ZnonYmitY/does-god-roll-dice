@@ -12,9 +12,21 @@ const uiAssets = [
   ["design/new/输入框和按钮底板/ChatGPT Image 2026年7月16日 19_19_50 (5).png", "public/assets/ui/btn_primary_hover.webp"],
   ["design/new/输入框和按钮底板/ChatGPT Image 2026年7月16日 19_19_51 (6).png", "public/assets/ui/btn_primary_pressed.webp"],
   ["design/new/输入框和按钮底板/ChatGPT Image 2026年7月16日 19_19_51 (7).png", "public/assets/ui/btn_primary_loading.webp"],
-  ["design/new/输入框和按钮底板/ChatGPT Image 2026年7月16日 19_19_52 (8).png", "public/assets/ui/btn_secondary_default.webp"],
-  ["design/new/输入框和按钮底板/ChatGPT Image 2026年7月16日 19_19_53 (9).png", "public/assets/ui/btn_secondary_hover.webp"],
-  ["design/new/输入框和按钮底板/ChatGPT Image 2026年7月16日 19_19_53 (10).png", "public/assets/ui/btn_secondary_pressed.webp"],
+];
+
+const secondaryButtonAssets = [
+  {
+    output: "public/assets/ui/btn_secondary_default.webp",
+    crop: { left: 55, top: 525, width: 405, height: 115 },
+  },
+  {
+    output: "public/assets/ui/btn_secondary_hover.webp",
+    crop: { left: 55, top: 710, width: 405, height: 115 },
+  },
+  {
+    output: "public/assets/ui/btn_secondary_pressed.webp",
+    crop: { left: 55, top: 890, width: 405, height: 120 },
+  },
 ];
 
 const iconAssets = [
@@ -204,6 +216,52 @@ async function optimizePortrait(sourcePath, outputPath) {
   };
 }
 
+async function optimizeSecondaryButton({ output: outputPath, crop }) {
+  const sourcePath = "design/new/按钮状态参考板.png";
+  const source = resolve(root, sourcePath);
+  const output = resolve(root, outputPath);
+  const { data, info } = await sharp(source)
+    .extract(crop)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  const bounds = addTransparentBackground(data, info.width, info.height, 8, 34);
+
+  // Keep the board's frame but clear its baked label; HTML supplies live button text.
+  for (let y = 25; y < Math.min(96, info.height); y += 1) {
+    for (let x = 27; x < Math.min(378, info.width); x += 1) {
+      data[(y * info.width + x) * 4 + 3] = 0;
+    }
+  }
+
+  const padding = 3;
+  const left = Math.max(0, bounds.minX - padding);
+  const top = Math.max(0, bounds.minY - padding);
+  const right = Math.min(info.width - 1, bounds.maxX + padding);
+  const bottom = Math.min(info.height - 1, bounds.maxY + padding);
+  const width = right - left + 1;
+  const height = bottom - top + 1;
+
+  mkdirSync(dirname(output), { recursive: true });
+  await sharp(data, {
+    raw: { width: info.width, height: info.height, channels: 4 },
+  })
+    .extract({ left, top, width, height })
+    .webp({ lossless: true, effort: 6 })
+    .toFile(output);
+
+  const metadata = await sharp(output).metadata();
+  const sourceMetadata = await sharp(source).metadata();
+  const sourceArea = sourceMetadata.width * sourceMetadata.height;
+  return {
+    asset: outputPath,
+    source: `${crop.width}x${crop.height}`,
+    output: `${metadata.width}x${metadata.height}`,
+    before: Math.round(statSync(source).size * ((crop.width * crop.height) / sourceArea)),
+    after: statSync(output).size,
+  };
+}
+
 const results = [];
 for (const [source, output] of uiAssets) {
   results.push(await optimizeTransparentAsset(source, output, {
@@ -213,6 +271,9 @@ for (const [source, output] of uiAssets) {
     maxWidth: output.includes("input_frame") ? 1320 : 720,
     quality: 88,
   }));
+}
+for (const asset of secondaryButtonAssets) {
+  results.push(await optimizeSecondaryButton(asset));
 }
 for (const [source, output] of diceAssets) {
   results.push(await optimizeTransparentAsset(source, output, {

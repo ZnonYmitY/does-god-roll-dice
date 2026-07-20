@@ -41,11 +41,11 @@ Status meanings:
 | `btn_primary_hover.webp` | supplied; reserved | Optimized; default plate remains stable and mouse hover uses a subtle CSS response |
 | `btn_primary_pressed.webp` | supplied; reserved | Optimized; press uses a 1px CSS displacement |
 | `btn_primary_loading.webp` | integrated | Transparent rolling-state plate |
-| `btn_secondary_default.webp` | integrated | Transparent result and modal action plate |
-| `btn_secondary_hover.webp` | supplied; reserved | Optimized; mouse hover uses a subtle CSS response |
-| `btn_secondary_pressed.webp` | supplied; reserved | Optimized; press uses a 1px CSS displacement |
+| `btn_secondary_default.webp` | integrated | Dark border plate extracted from the supplied button state board |
+| `btn_secondary_hover.webp` | integrated | Brighter dark border plate for mouse hover |
+| `btn_secondary_pressed.webp` | integrated | Darker border plate for active press |
 
-The original RGB PNG canvases were replaced by transparent, tightly cropped WebP files. Strongly recolored focus, hover, and pressed plates remain mapped in `assets.ts`, but are not preloaded or swapped during ordinary interaction because that created abrupt color flashes and sticky touch hover feedback.
+The original RGB PNG canvases were replaced by transparent, tightly cropped WebP files. Primary-button and input focus variants remain reserved to avoid abrupt color flashes. Secondary-button variants use the visually consistent dark states from `design/new/按钮状态参考板.png`; baked labels are removed so all live labels remain HTML.
 
 ## Dice
 

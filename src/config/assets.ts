@@ -67,6 +67,8 @@ export const assetVariableSources = {
   "--asset-primary-default": assets.buttons.primaryDefault,
   "--asset-primary-loading": assets.buttons.primaryLoading,
   "--asset-secondary-default": assets.buttons.secondaryDefault,
+  "--asset-secondary-hover": assets.buttons.secondaryHover,
+  "--asset-secondary-pressed": assets.buttons.secondaryPressed,
   "--asset-grain": assets.textures.grain,
   "--asset-paper": assets.textures.paper,
   "--asset-share-a": assets.share.backgroundA,
