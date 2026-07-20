@@ -63,15 +63,10 @@ export const assets = {
 
 export const assetVariableSources = {
   "--asset-input-default": assets.input.default,
-  "--asset-input-focus": assets.input.focus,
   "--asset-input-filled": assets.input.filled,
   "--asset-primary-default": assets.buttons.primaryDefault,
-  "--asset-primary-hover": assets.buttons.primaryHover,
-  "--asset-primary-pressed": assets.buttons.primaryPressed,
   "--asset-primary-loading": assets.buttons.primaryLoading,
   "--asset-secondary-default": assets.buttons.secondaryDefault,
-  "--asset-secondary-hover": assets.buttons.secondaryHover,
-  "--asset-secondary-pressed": assets.buttons.secondaryPressed,
   "--asset-grain": assets.textures.grain,
   "--asset-paper": assets.textures.paper,
   "--asset-share-a": assets.share.backgroundA,

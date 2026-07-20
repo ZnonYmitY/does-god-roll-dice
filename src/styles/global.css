@@ -232,11 +232,6 @@ button:disabled {
   transition: filter 180ms ease, transform 180ms ease;
 }
 
-.site-header__mark:hover {
-  filter: brightness(1.22);
-  transform: translateY(-1px);
-}
-
 .site-header__mark .asset-icon {
   width: 43px;
   height: 34px;
@@ -270,10 +265,6 @@ button:disabled {
   width: 16px;
   height: 16px;
   opacity: 0.72;
-}
-
-.nav-button:hover {
-  color: #f0e9d9;
 }
 
 .asset-icon {
@@ -433,6 +424,7 @@ button:disabled {
   background-position: center 52%, center, center;
   background-size: 110% 300%, auto, cover;
   box-shadow: inset 0 0 0 3px rgba(45, 39, 31, 0.17), 0 12px 30px rgba(0, 0, 0, 0.24);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .question-frame::before,
@@ -461,14 +453,11 @@ button:disabled {
 }
 
 .question-frame:focus-within {
-  border-color: rgba(135, 63, 50, 0.95);
-  background-image:
-    var(--asset-input-focus),
-    linear-gradient(98deg, rgba(74, 139, 212, 0.08), rgba(135, 63, 50, 0.16) 52%, transparent),
-    repeating-linear-gradient(2deg, rgba(74, 65, 50, 0.07) 0 1px, transparent 1px 5px),
-    linear-gradient(140deg, #d8cebd, #bcae98);
-  background-position: center 52%, center, center, center;
-  background-size: 110% 300%, cover, auto, cover;
+  border-color: rgba(213, 208, 196, 0.92);
+  box-shadow:
+    inset 0 0 0 3px rgba(45, 39, 31, 0.17),
+    0 12px 30px rgba(0, 0, 0, 0.24),
+    0 0 0 2px rgba(180, 154, 76, 0.14);
 }
 
 .question-frame--filled {
@@ -548,35 +537,32 @@ button:disabled {
   cursor: pointer;
   font-size: 21px;
   font-weight: 600;
-  transition: background-color 180ms ease, transform 120ms ease, filter 180ms ease;
-}
-
-.primary-button:hover:not(:disabled) {
-  background-image:
-    var(--asset-primary-hover),
-    repeating-linear-gradient(4deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 7px),
-    linear-gradient(180deg, #a24b3b, #703129);
-  filter: brightness(1.08);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    filter 160ms ease,
+    transform 100ms ease;
 }
 
 .primary-button:active:not(:disabled) {
-  background-image:
-    var(--asset-primary-pressed),
-    linear-gradient(180deg, #5e2b25, #7d382e);
-  transform: translateY(2px);
+  box-shadow: inset 0 2px 7px rgba(24, 12, 10, 0.4), 0 4px 14px rgba(0, 0, 0, 0.24);
+  filter: brightness(0.96);
+  transform: translateY(1px);
 }
 
 .primary-button:disabled {
   border-color: rgba(154, 145, 132, 0.24);
-  color: rgba(213, 208, 196, 0.43);
-  background: #4a3732;
-  box-shadow: none;
+  color: rgba(239, 229, 212, 0.5);
+  filter: brightness(0.68) saturate(0.72);
 }
 
 .app--rolling .question-form .primary-button {
+  background-color: #654039;
   background-image:
     var(--asset-primary-loading),
     linear-gradient(180deg, #5d3c36, #3d2a27);
+  filter: brightness(0.88) saturate(0.82);
 }
 
 .dice-disclaimer {
@@ -1128,16 +1114,15 @@ button:disabled {
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
-}
-
-.secondary-button:hover:not(:disabled) {
-  border-bottom-color: var(--rust);
-  color: #f0e9da;
-  background-image: var(--asset-secondary-hover);
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    filter 160ms ease,
+    transform 100ms ease;
 }
 
 .secondary-button:active:not(:disabled) {
-  background-image: var(--asset-secondary-pressed);
+  filter: brightness(0.94);
   transform: translateY(1px);
 }
 
@@ -1246,10 +1231,6 @@ button:disabled {
   border-radius: 50%;
 }
 
-.icon-button:hover {
-  border-color: rgba(213, 208, 196, 0.4);
-}
-
 .history-list {
   margin: 0;
   padding: 10px 0;
@@ -1272,10 +1253,6 @@ button:disabled {
   text-align: left;
   background: transparent;
   cursor: pointer;
-}
-
-.history-list button:hover {
-  background: rgba(180, 154, 76, 0.045);
 }
 
 .history-list__meta {
@@ -1425,6 +1402,37 @@ button:disabled {
   position: fixed;
   top: 0;
   left: -12000px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-header__mark:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+  }
+
+  .nav-button:hover {
+    color: #d9d2c5;
+  }
+
+  .primary-button:hover:not(:disabled) {
+    border-color: rgba(220, 194, 153, 0.62);
+    box-shadow: inset 0 0 0 3px rgba(37, 20, 17, 0.22), 0 9px 25px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.025);
+  }
+
+  .secondary-button:hover:not(:disabled) {
+    border-bottom-color: rgba(180, 154, 76, 0.58);
+    color: #d8d0c3;
+    filter: brightness(1.025);
+  }
+
+  .icon-button:hover {
+    border-color: rgba(213, 208, 196, 0.28);
+  }
+
+  .history-list button:hover {
+    background: rgba(180, 154, 76, 0.032);
+  }
 }
 
 .share-card {

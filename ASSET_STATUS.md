@@ -7,6 +7,7 @@ Runtime paths are centralized in `src/config/assets.ts`. Raw files under `design
 Status meanings:
 
 - `integrated`: present at the runtime path and used by a component.
+- `supplied; reserved`: present and mapped in `assets.ts`, but intentionally not used for live state swapping.
 - `local-only integrated`: wired and visible locally, but excluded from Git and public deployment.
 - `missing`: no independent production asset exists; the HTML/CSS fallback remains active.
 - `reference only`: a board exists for visual guidance but must not be cropped into a runtime asset.
@@ -35,17 +36,17 @@ Status meanings:
 | Asset group | Status | Runtime behavior |
 |---|---|---|
 | `input_frame_default.png` | integrated | Default textarea frame |
-| `input_frame_focus.png` | integrated | `:focus-within` frame |
+| `input_frame_focus.png` | supplied; reserved | Not switched live because its palette jump competes with text-entry focus; neutral CSS focus ring is active |
 | `input_frame_filled.png` | integrated | Non-empty textarea frame |
 | `btn_primary_default.png` | integrated | Default roll button |
-| `btn_primary_hover.png` | integrated | Primary hover state |
-| `btn_primary_pressed.png` | integrated | Primary active state |
+| `btn_primary_hover.png` | supplied; reserved | Default plate remains stable; mouse hover uses a subtle CSS light/shadow response |
+| `btn_primary_pressed.png` | supplied; reserved | Default plate remains stable; press uses a 1px CSS displacement |
 | `btn_primary_loading.png` | integrated | Rolling state |
 | `btn_secondary_default.png` | integrated | Result and modal actions |
-| `btn_secondary_hover.png` | integrated | Secondary hover state |
-| `btn_secondary_pressed.png` | integrated | Secondary active state |
+| `btn_secondary_hover.png` | supplied; reserved | Default plate remains stable; mouse hover uses a subtle CSS light response |
+| `btn_secondary_pressed.png` | supplied; reserved | Default plate remains stable; press uses a 1px CSS displacement |
 
-The supplied PNGs include a large black canvas. CSS background positioning crops to the plate while preserving HTML text and button semantics. Transparent, tightly cropped WebP/PNG exports are still recommended for production performance.
+The supplied PNGs include a large black canvas. CSS background positioning crops to the plate while preserving HTML text and button semantics. Strongly recolored focus, hover, and pressed plates remain available in `assets.ts`, but are not preloaded or swapped during ordinary interaction because that created abrupt color flashes and sticky touch hover feedback. Transparent, tightly cropped WebP/PNG exports are still recommended for production performance.
 
 ## Dice
 
