@@ -35,25 +35,25 @@ Status meanings:
 
 | Asset group | Status | Runtime behavior |
 |---|---|---|
-| `input_frame_default.png` | integrated | Default textarea frame |
-| `input_frame_focus.png` | supplied; reserved | Not switched live because its palette jump competes with text-entry focus; neutral CSS focus ring is active |
-| `input_frame_filled.png` | integrated | Non-empty textarea frame |
-| `btn_primary_default.png` | integrated | Default roll button |
-| `btn_primary_hover.png` | supplied; reserved | Default plate remains stable; mouse hover uses a subtle CSS light/shadow response |
-| `btn_primary_pressed.png` | supplied; reserved | Default plate remains stable; press uses a 1px CSS displacement |
-| `btn_primary_loading.png` | integrated | Rolling state |
-| `btn_secondary_default.png` | integrated | Result and modal actions |
-| `btn_secondary_hover.png` | supplied; reserved | Default plate remains stable; mouse hover uses a subtle CSS light response |
-| `btn_secondary_pressed.png` | supplied; reserved | Default plate remains stable; press uses a 1px CSS displacement |
+| `input_frame_default.webp` | integrated | Transparent, tightly cropped default textarea frame |
+| `input_frame_focus.webp` | supplied; reserved | Optimized but not switched live because its palette jump competes with text-entry focus |
+| `input_frame_filled.webp` | integrated | Transparent, tightly cropped non-empty textarea frame |
+| `btn_primary_default.webp` | integrated | Transparent default roll button |
+| `btn_primary_hover.webp` | supplied; reserved | Optimized; default plate remains stable and mouse hover uses a subtle CSS response |
+| `btn_primary_pressed.webp` | supplied; reserved | Optimized; press uses a 1px CSS displacement |
+| `btn_primary_loading.webp` | integrated | Transparent rolling-state plate |
+| `btn_secondary_default.webp` | integrated | Transparent result and modal action plate |
+| `btn_secondary_hover.webp` | supplied; reserved | Optimized; mouse hover uses a subtle CSS response |
+| `btn_secondary_pressed.webp` | supplied; reserved | Optimized; press uses a 1px CSS displacement |
 
-The supplied PNGs include a large black canvas. CSS background positioning crops to the plate while preserving HTML text and button semantics. Strongly recolored focus, hover, and pressed plates remain available in `assets.ts`, but are not preloaded or swapped during ordinary interaction because that created abrupt color flashes and sticky touch hover feedback. Transparent, tightly cropped WebP/PNG exports are still recommended for production performance.
+The original RGB PNG canvases were replaced by transparent, tightly cropped WebP files. Strongly recolored focus, hover, and pressed plates remain mapped in `assets.ts`, but are not preloaded or swapped during ordinary interaction because that created abrupt color flashes and sticky touch hover feedback.
 
 ## Dice
 
 | Asset group | Status | Runtime behavior |
 |---|---|---|
-| `dice_ivory_1.png` ... `dice_ivory_6.png` | integrated | Mapped by the actual top face, not source filename order |
-| `dice_red_1.png` ... `dice_red_6.png` | integrated | Mapped by the actual top face, not source filename order |
+| `dice_ivory_1.webp` ... `dice_ivory_6.webp` | integrated | Transparent 384px exports, mapped by the actual top face |
+| `dice_red_1.webp` ... `dice_red_6.webp` | integrated | Transparent 384px exports, mapped by the actual top face |
 
 All twelve result images use the same `DiceRoller` interface and retain the CSS pip fallback.
 
@@ -61,25 +61,34 @@ All twelve result images use the same `DiceRoller` interface and retain the CSS 
 
 | Asset | Status | Usage |
 |---|---|---|
-| `icon_dice_pair.png` | integrated | Home button in the header |
-| `icon_history.png` | integrated | History navigation |
-| `icon_retry.png` | integrated | Roll again |
-| `icon_shuffle.png` | integrated | Replace skill voices |
-| `icon_share.png` | integrated | Generate share image |
-| `icon_back.png` | integrated | Edit question |
-| `icon_expand.png` | integrated | Generate share preview |
-| `icon_info.png` | integrated | About navigation |
-| `icon_close.png` | integrated | Modal and drawer close controls |
+| `icon_dice_pair.webp` | integrated | Home button in the header |
+| `icon_history.webp` | integrated | History navigation |
+| `icon_retry.webp` | integrated | Roll again |
+| `icon_shuffle.webp` | integrated | Replace skill voices |
+| `icon_share.webp` | integrated | Generate share image |
+| `icon_back.webp` | integrated | Edit question |
+| `icon_expand.webp` | integrated | Generate share preview |
+| `icon_info.webp` | integrated | About navigation |
+| `icon_close.webp` | integrated | Modal and drawer close controls |
 
-The supplied icons also contain a black canvas. `AssetIcon` clips the source and uses screen blending on dark surfaces. The original hand-written SVG placeholders remain in the repository but are no longer the primary runtime paths.
+The icons are transparent, tightly cropped 192px WebP files. `AssetIcon` no longer relies on clipping or screen blending. The original hand-written SVG placeholders remain as independent fallbacks.
 
 ## Skill Portraits
 
-All 24 portraits are mapped to `public/assets/skills/original/<skill-id>.png`, and all 24 skill IDs are reachable from at least one category pool.
+All 24 portraits are converted to and mapped as `public/assets/skills/original/<skill-id>.webp`. All 24 skill IDs are reachable from at least one category pool, and local result-flow verification confirms the image path is active.
 
 Status: `local-only integrated`.
 
-The directory remains ignored by Git in accordance with `docs/04-assets-and-rights.md`. Public builds must omit these files and use the existing CSS attribute-color fallback unless redistribution rights are confirmed.
+The directory remains ignored by Git in accordance with `docs/04-assets-and-rights.md`. Public builds omit these files and use the existing CSS attribute-color fallback unless redistribution rights are confirmed. The WebP conversion does not change this distribution boundary.
+
+## Optimization
+
+Run `npm run assets:optimize` to regenerate all supplied UI, dice, icon, and local portrait WebP assets from `design/new/`.
+
+- UI, dice, and icon runtime assets: approximately 37 MB of PNG source copies to 1.2 MB of transparent WebP files.
+- All 55 processed files including local portraits: 42.02 MB to 2.08 MB, approximately 95% smaller.
+- Background removal is edge-connected, so enclosed dark details such as dice pips are retained.
+- Superseded public PNG copies have been removed; raw sources remain local under `design/new/`.
 
 ## Still Missing
 
@@ -90,6 +99,5 @@ The directory remains ignored by Git in accordance with `docs/04-assets-and-righ
 - `divider_long.webp` and `divider_short.webp`.
 - `paper_tag_01.webp`, `paper_tag_02.webp`, `note_corner_01.webp`, and `note_corner_02.webp`.
 - `share_card_bg_a.webp`, `share_card_bg_b.webp`, and `share_card_bg_c.webp`.
-- Transparent, tightly cropped, web-optimized exports for the supplied PNG UI, dice, and icon assets.
 
 All missing groups retain CSS/HTML fallbacks and do not block the interaction flow.
