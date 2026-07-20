@@ -8,7 +8,6 @@ Status meanings:
 
 - `integrated`: present at the runtime path and used by a component.
 - `supplied; reserved`: present and mapped in `assets.ts`, but intentionally not used for live state swapping.
-- `local-only integrated`: wired and visible locally, but excluded from Git and public deployment.
 - `missing`: no independent production asset exists; the HTML/CSS fallback remains active.
 - `reference only`: a board exists for visual guidance but must not be cropped into a runtime asset.
 
@@ -75,11 +74,11 @@ The icons are transparent, tightly cropped 192px WebP files. `AssetIcon` no long
 
 ## Skill Portraits
 
-All 24 portraits are converted to and mapped as `public/assets/skills/original/<skill-id>.webp`. All 24 skill IDs are reachable from at least one category pool, and local result-flow verification confirms the image path is active.
+All 24 portraits are converted to and mapped as `public/assets/skills/original/<skill-id>.webp`. All 24 skill IDs are reachable from at least one category pool, and result-flow verification confirms the image path is active.
 
-Status: `local-only integrated`.
+Status: `integrated`.
 
-The directory remains ignored by Git in accordance with `docs/04-assets-and-rights.md`. Public builds omit these files and use the existing CSS attribute-color fallback unless redistribution rights are confirmed. The WebP conversion does not change this distribution boundary.
+The directory is tracked by Git and included in public builds. `SkillPortrait` still uses the existing CSS attribute-color fallback when an image fails to load.
 
 ## Optimization
 

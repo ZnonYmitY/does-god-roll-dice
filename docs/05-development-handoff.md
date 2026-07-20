@@ -160,7 +160,7 @@ public/assets/
     conceptualization.webp
 ```
 
-`skills/original/` 中的原作肖像只在本地使用，不提交公开仓库。
+`skills/original/` 中的 24 张 WebP 肖像随公开 Demo 发布；组件必须继续保留图片加载失败时的 CSS 属性色回退。
 
 ## 8. 当前母版设计图
 
