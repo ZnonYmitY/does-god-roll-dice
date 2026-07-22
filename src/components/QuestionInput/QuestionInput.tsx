@@ -1,4 +1,5 @@
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { assets } from "../../config/assets";
 
 const MAX_LENGTH = 120;
 
@@ -17,6 +18,12 @@ export function QuestionInput({
   disabled = false,
   error,
 }: QuestionInputProps) {
+  const [loadedButtonImages, setLoadedButtonImages] = useState<
+    Record<"default" | "hover" | "pressed" | "loading", boolean>
+  >({ default: false, hover: false, pressed: false, loading: false });
+  const buttonImagesReady = Object.values(loadedButtonImages).every(Boolean);
+  const buttonLabel = disabled ? "正在检定……" : "掷骰检定";
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit();
@@ -55,11 +62,29 @@ export function QuestionInput({
         )}
       </div>
       <button
-        className="primary-button"
+        className={`primary-button roll-button${buttonImagesReady ? " roll-button--ready" : ""}${disabled ? " roll-button--loading" : ""}`}
         type="submit"
         disabled={disabled || value.trim().length === 0}
+        aria-label={buttonLabel}
       >
-        {disabled ? "正在检定……" : "掷骰检定"}
+        <span className="roll-button__fallback">{buttonLabel}</span>
+        {(["default", "hover", "pressed", "loading"] as const).map((state) => (
+          <img
+            className={`roll-button__image roll-button__image--${state}`}
+            src={assets.buttons.roll[state]}
+            alt=""
+            aria-hidden="true"
+            draggable="false"
+            onLoad={() =>
+              setLoadedButtonImages((current) => ({ ...current, [state]: true }))
+            }
+            onError={(event) => {
+              event.currentTarget.hidden = true;
+              setLoadedButtonImages((current) => ({ ...current, [state]: false }));
+            }}
+            key={state}
+          />
+        ))}
       </button>
       <p className="dice-disclaimer">
         两枚骰子对此表示愿意负责，但它们不会解释结果。

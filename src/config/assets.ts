@@ -40,6 +40,12 @@ export const assets = {
         pressed: path("ui/btn_share_pressed.webp"),
       },
     },
+    roll: {
+      default: path("ui/btn_roll_default.webp"),
+      hover: path("ui/btn_roll_hover.webp"),
+      pressed: path("ui/btn_roll_pressed.webp"),
+      loading: path("ui/btn_roll_loading.webp"),
+    },
   },
   dice: {
     ivory: (value: number) => path(`dice/dice_ivory_${value}.webp`),

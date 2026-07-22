@@ -33,6 +33,25 @@ const secondaryButtonAssets = [
   },
 ]);
 
+const rollButtonAssets = [
+  {
+    output: "public/assets/ui/btn_roll_default.webp",
+    crop: { left: 50, top: 220, width: 310, height: 115 },
+  },
+  {
+    output: "public/assets/ui/btn_roll_hover.webp",
+    crop: { left: 393, top: 220, width: 310, height: 115 },
+  },
+  {
+    output: "public/assets/ui/btn_roll_pressed.webp",
+    crop: { left: 739, top: 220, width: 310, height: 115 },
+  },
+  {
+    output: "public/assets/ui/btn_roll_loading.webp",
+    crop: { left: 1084, top: 220, width: 310, height: 115 },
+  },
+];
+
 const iconAssets = [
   ["design/new/左上角双骰图标.png", "public/assets/icons/icon_dice_pair.webp"],
   ["design/new/功能图标/ChatGPT Image 2026年7月16日 19_16_10 (1).png", "public/assets/icons/icon_history.webp"],
@@ -270,6 +289,9 @@ for (const [source, output] of uiAssets) {
   }));
 }
 for (const asset of secondaryButtonAssets) {
+  results.push(await optimizeSecondaryButton(asset));
+}
+for (const asset of rollButtonAssets) {
   results.push(await optimizeSecondaryButton(asset));
 }
 for (const [source, output] of diceAssets) {
