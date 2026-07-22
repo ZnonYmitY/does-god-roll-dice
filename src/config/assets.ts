@@ -10,6 +10,10 @@ export const assets = {
     resultDesktop: path("backgrounds/result_bg_desktop.png"),
     resultMobile: path("backgrounds/result_bg_desktop.png"),
   },
+  titles: {
+    home: path("titles/home_title.webp"),
+    homeSubtitle: path("titles/home_subtitle.webp"),
+  },
   input: {
     default: path("ui/input_frame_default.webp"),
     focus: path("ui/input_frame_focus.webp"),

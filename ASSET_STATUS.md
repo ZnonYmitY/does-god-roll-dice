@@ -24,11 +24,12 @@ Status meanings:
 
 | Asset | Status | Runtime behavior |
 |---|---|---|
-| Final hero title | missing; reference only | Accessible HTML title and licensed font treatment remain active |
+| `home_title.webp` | integrated | Transparent title extracted from the user-supplied home design; HTML title remains as the accessible fallback |
+| `home_subtitle.webp` | integrated | Transparent subtitle extracted from the user-supplied home design; HTML copy remains as the accessible fallback |
 | English observation label | missing; reference only | IBM Plex Mono HTML text remains active |
 | Five result-level titles | missing; reference only | HTML result-level labels remain active |
 
-`design/new/标题与英文标签参考板.png` and `design/new/五种结果标题参考板.png` are boards, not independent transparent assets.
+`design/new/标题与英文标签参考板.png` and `design/new/五种结果标题参考板.png` remain reference boards. The home title assets are reproducibly extracted by `npm run assets:titles` from the user-approved home design image.
 
 ## Input And Buttons
 
@@ -97,7 +98,7 @@ Run `npm run assets:optimize` to regenerate all supplied UI, dice, icon, and loc
 ## Still Missing
 
 - Dedicated mobile home and result backgrounds.
-- Independent hero-title and observation-label assets.
+- Independent observation-label asset.
 - Independent result-level title assets.
 - `texture_overlay_grain.webp` and `texture_overlay_paper.webp`.
 - `divider_long.webp` and `divider_short.webp`.

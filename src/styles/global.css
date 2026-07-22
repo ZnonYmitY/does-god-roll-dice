@@ -364,7 +364,7 @@ button:disabled {
     -1px 1px rgba(24, 20, 18, 0.58);
 }
 
-.hero h1::before {
+.hero h1:not(.hero__title--asset)::before {
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -377,12 +377,40 @@ button:disabled {
   mask-image: repeating-linear-gradient(0deg, #000 0 4px, transparent 4px 13px);
 }
 
+.hero__title img,
+.hero__subtitle img {
+  display: none;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero__title--asset span,
+.hero__subtitle--asset span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hero__title--asset img {
+  display: block;
+  width: min(100%, 675px);
+}
+
 .hero__subtitle {
+  position: relative;
   max-width: 650px;
   margin: 24px 0 0;
   color: #c5bdae;
   font-size: 20px;
   line-height: 1.7;
+}
+
+.hero__subtitle--asset img {
+  display: block;
+  width: min(100%, 538px);
 }
 
 .hero__subtitle::after {

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "assets:optimize": "node scripts/optimize-assets.mjs",
+    "assets:titles": "node scripts/extract-title-assets.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
