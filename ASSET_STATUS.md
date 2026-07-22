@@ -41,7 +41,7 @@ Status meanings:
 | `btn_primary_hover.webp` | supplied; reserved | Optimized; default plate remains stable and mouse hover uses a subtle CSS response |
 | `btn_primary_pressed.webp` | supplied; reserved | Optimized; press uses a 1px CSS displacement |
 | `btn_primary_loading.webp` | integrated | Transparent rolling-state plate |
-| `btn_roll_default/hover/pressed/loading.webp` | integrated | Home roll action uses four label-bearing images from the supplied state board; HTML is the loading-failure fallback |
+| `btn_roll_default/hover/pressed/loading.webp` | integrated | Label-bearing board images use horizontal nine-slice expansion so labels and corners retain their proportions inside the original compact button size |
 | `btn_secondary_default.webp` | integrated | Dark border plate extracted from the supplied button state board |
 | `btn_secondary_hover.webp` | integrated | Brighter dark border plate for mouse hover |
 | `btn_secondary_pressed.webp` | integrated | Darker border plate for active press |

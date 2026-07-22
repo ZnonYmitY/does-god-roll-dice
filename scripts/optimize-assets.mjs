@@ -37,18 +37,22 @@ const rollButtonAssets = [
   {
     output: "public/assets/ui/btn_roll_default.webp",
     crop: { left: 50, top: 220, width: 310, height: 115 },
+    targetWidth: 668,
   },
   {
     output: "public/assets/ui/btn_roll_hover.webp",
     crop: { left: 393, top: 220, width: 310, height: 115 },
+    targetWidth: 668,
   },
   {
     output: "public/assets/ui/btn_roll_pressed.webp",
     crop: { left: 739, top: 220, width: 310, height: 115 },
+    targetWidth: 668,
   },
   {
     output: "public/assets/ui/btn_roll_loading.webp",
     crop: { left: 1084, top: 220, width: 310, height: 115 },
+    targetWidth: 668,
   },
 ];
 
@@ -239,7 +243,7 @@ async function optimizePortrait(sourcePath, outputPath) {
   };
 }
 
-async function optimizeSecondaryButton({ output: outputPath, crop }) {
+async function optimizeSecondaryButton({ output: outputPath, crop, targetWidth }) {
   const sourcePath = "design/new/按钮状态参考板.png";
   const source = resolve(root, sourcePath);
   const output = resolve(root, outputPath);
@@ -259,12 +263,63 @@ async function optimizeSecondaryButton({ output: outputPath, crop }) {
   const height = bottom - top + 1;
 
   mkdirSync(dirname(output), { recursive: true });
-  await sharp(data, {
+  const extracted = await sharp(data, {
     raw: { width: info.width, height: info.height, channels: 4 },
   })
     .extract({ left, top, width, height })
-    .webp({ lossless: true, effort: 6 })
-    .toFile(output);
+    .ensureAlpha()
+    .raw()
+    .toBuffer();
+
+  if (targetWidth && targetWidth > width) {
+    // Preserve label and corner proportions; only extend the quiet side textures.
+    const cornerWidth = Math.round((20 / 310) * width);
+    const centerStart = Math.round((45 / 310) * width);
+    const centerEnd = Math.round((270 / 310) * width);
+    const rightCornerStart = Math.round((290 / 310) * width);
+    const centerWidth = centerEnd - centerStart;
+    const rightCornerWidth = width - rightCornerStart;
+    const stretchSpace = targetWidth - cornerWidth - centerWidth - rightCornerWidth;
+    const leftStretchWidth = Math.floor(stretchSpace / 2);
+    const rightStretchWidth = stretchSpace - leftStretchWidth;
+    const rawInput = { raw: { width, height, channels: 4 } };
+    const slice = (sliceLeft, sliceWidth, resizedWidth = sliceWidth) =>
+      sharp(extracted, rawInput)
+        .extract({ left: sliceLeft, top: 0, width: sliceWidth, height })
+        .resize({ width: resizedWidth, height, fit: "fill" })
+        .png()
+        .toBuffer();
+    const layers = await Promise.all([
+      slice(0, cornerWidth),
+      slice(cornerWidth, centerStart - cornerWidth, leftStretchWidth),
+      slice(centerStart, centerWidth),
+      slice(centerEnd, rightCornerStart - centerEnd, rightStretchWidth),
+      slice(rightCornerStart, rightCornerWidth),
+    ]);
+    const positions = [
+      0,
+      cornerWidth,
+      cornerWidth + leftStretchWidth,
+      cornerWidth + leftStretchWidth + centerWidth,
+      targetWidth - rightCornerWidth,
+    ];
+
+    await sharp({
+      create: {
+        width: targetWidth,
+        height,
+        channels: 4,
+        background: { r: 0, g: 0, b: 0, alpha: 0 },
+      },
+    })
+      .composite(layers.map((input, index) => ({ input, left: positions[index], top: 0 })))
+      .webp({ lossless: true, effort: 6 })
+      .toFile(output);
+  } else {
+    await sharp(extracted, { raw: { width, height, channels: 4 } })
+      .webp({ lossless: true, effort: 6 })
+      .toFile(output);
+  }
 
   const metadata = await sharp(output).metadata();
   const sourceMetadata = await sharp(source).metadata();
