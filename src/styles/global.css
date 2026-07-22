@@ -1131,6 +1131,74 @@ button:disabled {
   gap: 8px 20px;
 }
 
+.result-action-button {
+  position: relative;
+  display: inline-flex;
+  width: 190px;
+  min-height: 0;
+  aspect-ratio: 405 / 115;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  color: #e1d7c7;
+  background: #211e1a;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.24);
+  cursor: pointer;
+}
+
+.result-action-button__fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 17px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.result-action-button__fallback .asset-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.result-action-button__image {
+  position: absolute;
+  inset: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.result-action-button--ready .result-action-button__fallback {
+  visibility: hidden;
+}
+
+.result-action-button--ready .result-action-button__image--default {
+  display: block;
+}
+
+.result-action-button--ready:active .result-action-button__image--default {
+  display: none;
+}
+
+.result-action-button--ready:active .result-action-button__image--pressed:not([hidden]) {
+  display: block;
+}
+
+.result-action-button:active {
+  transform: translateY(1px);
+}
+
+.result-action-button--text {
+  width: 190px;
+  aspect-ratio: 405 / 115;
+  justify-content: center;
+}
+
 .secondary-button {
   position: relative;
   display: inline-flex;
@@ -1471,6 +1539,22 @@ button:disabled {
       repeating-linear-gradient(3deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 5px),
       linear-gradient(180deg, #302c26, #1e1b17);
     filter: brightness(1.015);
+  }
+
+  .result-action-button--ready:hover .result-action-button__image--default {
+    display: none;
+  }
+
+  .result-action-button--ready:hover .result-action-button__image--hover:not([hidden]) {
+    display: block;
+  }
+
+  .result-action-button--ready:active .result-action-button__image--hover {
+    display: none;
+  }
+
+  .result-action-button--ready:active .result-action-button__image--pressed:not([hidden]) {
+    display: block;
   }
 
   .icon-button:hover {
@@ -2058,6 +2142,11 @@ button:disabled {
     width: 100%;
     justify-content: flex-start;
     font-size: 13px;
+  }
+
+  .result-action-button,
+  .result-action-button--text {
+    width: min(100%, 260px);
   }
 
   .site-footer {

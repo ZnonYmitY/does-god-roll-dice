@@ -15,19 +15,23 @@ const uiAssets = [
 ];
 
 const secondaryButtonAssets = [
+  ["retry", 55],
+  ["shuffle", 525],
+  ["share", 995],
+].flatMap(([action, left]) => [
   {
-    output: "public/assets/ui/btn_secondary_default.webp",
-    crop: { left: 55, top: 525, width: 405, height: 115 },
+    output: `public/assets/ui/btn_${action}_default.webp`,
+    crop: { left, top: 525, width: 405, height: 115 },
   },
   {
-    output: "public/assets/ui/btn_secondary_hover.webp",
-    crop: { left: 55, top: 710, width: 405, height: 115 },
+    output: `public/assets/ui/btn_${action}_hover.webp`,
+    crop: { left, top: 710, width: 405, height: 115 },
   },
   {
-    output: "public/assets/ui/btn_secondary_pressed.webp",
-    crop: { left: 55, top: 890, width: 405, height: 120 },
+    output: `public/assets/ui/btn_${action}_pressed.webp`,
+    crop: { left, top: 890, width: 405, height: 120 },
   },
-];
+]);
 
 const iconAssets = [
   ["design/new/左上角双骰图标.png", "public/assets/icons/icon_dice_pair.webp"],
@@ -226,13 +230,6 @@ async function optimizeSecondaryButton({ output: outputPath, crop }) {
     .raw()
     .toBuffer({ resolveWithObject: true });
   const bounds = addTransparentBackground(data, info.width, info.height, 8, 34);
-
-  // Keep the board's frame but clear its baked label; HTML supplies live button text.
-  for (let y = 25; y < Math.min(96, info.height); y += 1) {
-    for (let x = 27; x < Math.min(378, info.width); x += 1) {
-      data[(y * info.width + x) * 4 + 3] = 0;
-    }
-  }
 
   const padding = 3;
   const left = Math.max(0, bounds.minX - padding);

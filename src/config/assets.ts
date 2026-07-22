@@ -23,6 +23,23 @@ export const assets = {
     secondaryDefault: path("ui/btn_secondary_default.webp"),
     secondaryHover: path("ui/btn_secondary_hover.webp"),
     secondaryPressed: path("ui/btn_secondary_pressed.webp"),
+    resultActions: {
+      retry: {
+        default: path("ui/btn_retry_default.webp"),
+        hover: path("ui/btn_retry_hover.webp"),
+        pressed: path("ui/btn_retry_pressed.webp"),
+      },
+      shuffle: {
+        default: path("ui/btn_shuffle_default.webp"),
+        hover: path("ui/btn_shuffle_hover.webp"),
+        pressed: path("ui/btn_shuffle_pressed.webp"),
+      },
+      share: {
+        default: path("ui/btn_share_default.webp"),
+        hover: path("ui/btn_share_hover.webp"),
+        pressed: path("ui/btn_share_pressed.webp"),
+      },
+    },
   },
   dice: {
     ivory: (value: number) => path(`dice/dice_ivory_${value}.webp`),

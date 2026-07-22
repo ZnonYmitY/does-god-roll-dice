@@ -1,6 +1,6 @@
 # Asset Status
 
-Audit date: 2026-07-20.
+Audit date: 2026-07-22.
 
 Runtime paths are centralized in `src/config/assets.ts`. Raw files under `design/new/` are local source material; assets approved for the public demo are promoted to `public/assets/` with stable names.
 
@@ -44,8 +44,12 @@ Status meanings:
 | `btn_secondary_default.webp` | integrated | Dark border plate extracted from the supplied button state board |
 | `btn_secondary_hover.webp` | integrated | Brighter dark border plate for mouse hover |
 | `btn_secondary_pressed.webp` | integrated | Darker border plate for active press |
+| `btn_retry_default/hover/pressed.webp` | integrated | Result action uses the supplied baked Chinese label; HTML retains its accessible name only |
+| `btn_shuffle_default/hover/pressed.webp` | integrated | Result action uses the supplied baked Chinese label; HTML retains its accessible name only |
+| `btn_share_default/hover/pressed.webp` | integrated | Result action uses the supplied baked Chinese label; HTML retains its accessible name only |
+| `修改问题` image states | missing | No matching row exists on the supplied board; the dark plate, icon, and live HTML label remain active |
 
-The original RGB PNG canvases were replaced by transparent, tightly cropped WebP files. Primary-button and input focus variants remain reserved to avoid abrupt color flashes. Secondary-button variants use the visually consistent dark states from `design/new/按钮状态参考板.png`; baked labels are removed so all live labels remain HTML.
+The original RGB PNG canvases were replaced by transparent, tightly cropped WebP files. Primary-button and input focus variants remain reserved to avoid abrupt color flashes. The first three result actions use nine label-bearing state images cropped from `design/new/按钮状态参考板.png`; the generic secondary plates remain available for unlabeled controls and fallbacks.
 
 ## Dice
 
@@ -85,7 +89,7 @@ The directory is tracked by Git and included in public builds. `SkillPortrait` s
 Run `npm run assets:optimize` to regenerate all supplied UI, dice, icon, and local portrait WebP assets from `design/new/`.
 
 - UI, dice, and icon runtime assets: approximately 37 MB of PNG source copies to 1.2 MB of transparent WebP files.
-- All 55 processed files including local portraits: 42.02 MB to 2.08 MB, approximately 95% smaller.
+- All 61 processed files including local portraits and nine result-action states: 40.08 MB to 2.47 MB, approximately 94% smaller.
 - Background removal is edge-connected, so enclosed dark details such as dice pips are retained.
 - Superseded public PNG copies have been removed; raw sources remain local under `design/new/`.
 
@@ -98,5 +102,6 @@ Run `npm run assets:optimize` to regenerate all supplied UI, dice, icon, and loc
 - `divider_long.webp` and `divider_short.webp`.
 - `paper_tag_01.webp`, `paper_tag_02.webp`, `note_corner_01.webp`, and `note_corner_02.webp`.
 - `share_card_bg_a.webp`, `share_card_bg_b.webp`, and `share_card_bg_c.webp`.
+- Three matching state images for the `修改问题` result action.
 
 All missing groups retain CSS/HTML fallbacks and do not block the interaction flow.
